@@ -43,7 +43,7 @@ export default function ComparePage() {
       if (!response.ok) throw new Error('Failed to fetch comparison data.')
       const data = await response.json()
       setComparisonData(data)
-    } catch (err: unknown) { // Use unknown for better type safety
+    } catch (err) {
       setError('An error occurred while generating the comparison. Please try again.')
     } finally {
       setIsLoading(false)
@@ -68,7 +68,7 @@ export default function ComparePage() {
           onChange={(e) => setToolA(e.target.value)}
           className="w-full px-3 py-3 bg-background border border-glass-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
         >
-          {tools.map((tool) => ( <option key={tool.id} value={tool.id}>{tool.name}</option>))}
+          {tools.map((tool) => ( <option key={tool.id} value={tool.id}>{tool.name}</option> ))}
         </select>
         <div className="text-center">
             <button
