@@ -5,8 +5,8 @@ import { createClient } from '@/lib/supabase/server';
 import { getTools, type Tool } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
 
-// Define the props type for the page
-type Props = {
+// Define the props type correctly for a Next.js page
+type ToolDetailPageProps = {
   params: { id: string };
 };
 
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
   return tools.map((tool) => ({ id: tool.id }));
 }
 
-export default async function ToolDetailPage({ params }: Props) {
+export default async function ToolDetailPage({ params }: ToolDetailPageProps) {
   const tool = await getTool(params.id);
   if (!tool) notFound();
 
