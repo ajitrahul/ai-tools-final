@@ -7,8 +7,13 @@ import SaveToolButton from '@/components/SaveToolButton';
 
 // This is the simplest possible props definition that will work.
 export default async function ToolDetailPage({ params }: { params: { id: string } }) {
-  const tool = await getTools().then(tools => tools.find(t => t.id === params.id));
-  if (!tool) notFound();
+  // Inlining the logic to prevent type inference issues
+  const allTools = await getTools();
+  const tool = allTools.find(t => t.id === params.id);
+
+  if (!tool) {
+    notFound();
+  }
 
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -85,7 +90,7 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
   );
 }
 
-// Function to generate static paths for all tools
+// This function is still needed for Next.js to know which pages to build
 export async function generateStaticParams() {
     const tools = await getTools();
     return tools.map((tool) => ({
