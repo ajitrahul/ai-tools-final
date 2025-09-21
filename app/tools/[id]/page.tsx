@@ -7,7 +7,7 @@ import SaveToolButton from '@/components/SaveToolButton';
 
 // This is the simplest possible props definition that will work.
 export default async function ToolDetailPage({ params }: { params: { id: string } }) {
-  // Inlining the logic to prevent type inference issues
+  // Inlining the logic to prevent type inference issues during the build
   const allTools = await getTools();
   const tool = allTools.find(t => t.id === params.id);
 
