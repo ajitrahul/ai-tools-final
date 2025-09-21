@@ -2,10 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { getTools, type Tool } from '@/lib/data';
+import { getTools } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
 
-// This is the simplest possible props definition that will work.
 export default async function ToolDetailPage({ params }: { params: { id: string } }) {
   const tool = await getTools().then(tools => tools.find(t => t.id === params.id));
   if (!tool) notFound();
@@ -29,7 +28,7 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
          </div>
        </header>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-2 space-y-8">
+        <div className="md-col-span-2 space-y-8">
           <div className="rounded-xl bg-glass p-6 border border-glass-border">
             <h2 className="text-2xl font-bold font-heading border-b-2 border-primary/30 pb-2 mb-4">Full Description</h2>
             <p className="text-text-secondary leading-relaxed">{tool.full_description}</p>
@@ -50,7 +49,8 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
             <div className="rounded-xl bg-glass p-6 border border-glass-border">
               <h3 className="text-xl font-bold font-heading mb-3 text-red-400">Cons</h3>
               <ul className="space-y-2">
-                {tool.cons.map((con, index) => ( <li key-index={index} className="flex items-start"><span className="text-red-400 mr-2">&#10007;</span><span className="text-text-secondary">{con}</span></li> ))}
+                {/* THIS WAS THE LINE WITH THE ERROR. 'key-index' is now 'key' */}
+                {tool.cons.map((con, index) => ( <li key={index} className="flex items-start"><span className="text-red-400 mr-2">&#10007;</span><span className="text-text-secondary">{con}</span></li> ))}
               </ul>
             </div>
           </div>
