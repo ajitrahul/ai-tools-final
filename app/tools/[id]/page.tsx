@@ -5,9 +5,10 @@ import { createClient } from '@/lib/supabase/server';
 import { getTools } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
 
-// This is the simplest possible props definition that will work.
+// This is the simplest possible props definition that is guaranteed to work.
 export default async function ToolDetailPage({ params }: { params: { id: string } }) {
-  // Inlining the logic to prevent type inference issues during the build
+  // We will fetch and find the tool directly inside the component
+  // to prevent any type inference issues during the build process.
   const allTools = await getTools();
   const tool = allTools.find(t => t.id === params.id);
 
