@@ -1,0 +1,71 @@
+[
+  {
+    "id": "gpt-4o",
+    "name": "GPT-4o",
+    "logo_url": "/logos/openai-logo.png",
+    "tagline": "The most advanced multimodal AI model from OpenAI.",
+    "website_url": "https://openai.com/gpt-4o/",
+    "category": ["Language", "Code", "Multimodal"],
+    "pricing": {
+      "model": "Freemium",
+      "details": "Free tier with limits, API usage is pay-as-you-go."
+    },
+    "pros": ["Extremely capable", "Multimodal input (text, image, audio)", "Fast response times"],
+    "cons": ["API costs can add up", "Knowledge cutoff (though recent)", "Can be verbose"],
+    "best_for": ["Developers", "Content Creators", "Researchers"],
+    "full_description": "GPT-4o ('o' for 'omni') is OpenAI's latest flagship model, designed to handle a combination of text, audio, and image inputs and outputs. It offers GPT-4 level intelligence with significantly faster speeds and improved capabilities across different modalities, making it one of the most versatile models available.",
+    "features": ["Text Generation", "Code Completion", "Image Analysis", "Voice Conversation", "Data Analysis"],
+    "rating": {
+      "overall": 4.9,
+      "ease_of_use": 4.5,
+      "output_quality": 4.9,
+      "value": 4.7
+    }
+  },
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "logo_url": "/logos/midjourney-logo.png",
+    "tagline": "An independent research lab producing an AI-powered image generator.",
+    "website_url": "https://www.midjourney.com/",
+    "category": ["Image"],
+    "pricing": {
+      "model": "Paid",
+      "details": "Subscription starts at $10/month."
+    },
+    "pros": ["Highly artistic and stylized outputs", "Strong community and style prompts", "Continuous model improvements"],
+    "cons": ["Interface is primarily through Discord", "Steep learning curve for advanced prompting", "No free trial"],
+    "best_for": ["Artists", "Designers", "Hobbyists"],
+    "full_description": "Midjourney is renowned for creating beautiful, artistic, and often photorealistic images from textual prompts. It operates through a Discord bot, which fosters a unique community where users can share and get inspired by others' creations. Its proprietary models are known for their distinct aesthetic quality.",
+    "features": ["Text-to-Image Generation", "Image Upscaling", "Style Tuning", "Image Remixing"],
+    "rating": {
+      "overall": 4.8,
+      "ease_of_use": 3.8,
+      "output_quality": 5.0,
+      "value": 4.5
+    }
+  },
+  {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "logo_url": "/logos/elevenlabs-logo.png",
+    "tagline": "The most realistic and versatile AI speech software, ever.",
+    "website_url": "https://elevenlabs.io/",
+    "category": ["Audio", "Voice"],
+    "pricing": {
+      "model": "Freemium",
+      "details": "Free tier with 10,000 characters/mo. Paid plans start at $5/mo."
+    },
+    "pros": ["Incredibly realistic and human-like voices", "Voice cloning capability", "Supports multiple languages"],
+    "cons": ["Free tier is limited", "Ethical concerns around voice cloning", "Can be expensive for high-volume usage"],
+    "best_for": ["Podcasters", "Video Creators", "Audiobook Producers"],
+    "full_description": "ElevenLabs provides a premier text-to-speech (TTS) and voice cloning platform. Its AI models can generate speech that is rich in emotion and intonation, making it nearly indistinguishable from a human speaker. Users can choose from a library of voices or clone their own, offering unparalleled flexibility for audio projects.",
+    "features": ["Text-to-Speech", "Voice Cloning", "Speech Synthesis API", "Projects for long-form content"],
+    "rating": {
+      "overall": 4.9,
+      "ease_of_use": 4.7,
+      "output_quality": 5.0,
+      "value": 4.6
+    }
+  }
+]
