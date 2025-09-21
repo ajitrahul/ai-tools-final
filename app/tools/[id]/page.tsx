@@ -6,9 +6,8 @@ import { getTools, type Tool } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
 import type { User } from '@supabase/supabase-js';
 
-// NEW: A separate, internal component to render the UI.
-// This component receives simple, clean props (tool, user), which avoids the complex
-// type issues that were causing the build to fail.
+// A separate, internal component to render the UI.
+// This structure avoids the complex type issues that were breaking the Vercel build.
 function ToolDetailsView({ tool, user }: { tool: Tool; user: User | null }) {
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
