@@ -1,46 +1,24 @@
-'use client' // Important: This converts the page to a Client Component
+'use client'
 
 import { useState, useEffect } from 'react'
 import UploadForm from '@/components/UploadForm'
 
-// --- Define types for our analytics data ---
-type CountryData = {
-  country: string
-  total: number
-  today: number // Note: Our current API doesn't populate this, but the structure is ready
-}
+type CountryData = { country: string; total: number; today: number; }
 
-// --- Helper Component for a single metric display ---
-const AnalyticsMetric = ({ title, value, change }: { title: string; value: string; change?: string }) => {
-    return (
-        <div className="bg-background-start p-4 rounded-lg shadow-inner">
-            <h3 className="text-sm font-medium text-text-secondary">{title}</h3>
-            <div className="flex items-baseline justify-between">
-                <p className="text-2xl font-bold font-heading text-text-main">{value}</p>
-                {change && <span className="text-sm font-semibold text-green-400">{change}</span>}
-            </div>
-        </div>
-    )
-}
-
-// --- Main Admin Page ---
 export default function AdminPage() {
   const [countryData, setCountryData] = useState<CountryData[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
 
-  // This effect runs when the component mounts to fetch live data
   useEffect(() => {
     async function fetchAnalytics() {
       try {
         const response = await fetch('/api/admin/analytics')
-        if (!response.ok) {
-          throw new Error('Failed to fetch analytics from the server.')
-        }
+        if (!response.ok) throw new Error('Failed to fetch analytics from the server.')
         const data = await response.json()
         setCountryData(data.geographicalBreakdown || [])
-      } catch (err: any) {
-        setError(err.message)
+      } catch (err) {
+        setError((err as Error).message)
       } finally {
         setIsLoading(false)
       }
@@ -48,19 +26,17 @@ export default function AdminPage() {
     fetchAnalytics()
   }, [])
 
-
   return (
     <div className="max-w-7xl mx-auto space-y-12 animate-fade-in">
       <div>
         <h1 className="text-4xl font-bold font-heading">Admin Dashboard</h1>
         <p className="text-text-secondary mt-2">
-          Welcome, Admin. Here's a snapshot of your site's performance.
+          {"Welcome, Admin. Here's a snapshot of your site's performance."}
         </p>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-            <div className="rounded-xl bg-white/5 p-6 ring-1 ring-inset ring-white/10 backdrop-blur-md">
+            <div className="rounded-xl bg-glass p-6 border border-glass-border">
                 <h2 className="text-2xl font-bold font-heading border-b-2 border-primary/30 pb-3 mb-6">
                     Visitors by Country (Last 30 Days)
                 </h2>
@@ -70,9 +46,9 @@ export default function AdminPage() {
                     <ul className="space-y-3">
                         {countryData.length > 0 ? (
                             countryData.map((item, index) => (
-                                <li key={index} className="flex justify-between items-center bg-background-start p-3 rounded-md shadow-inner">
+                                <li key={index} className="flex justify-between items-center bg-background p-3 rounded-md">
                                     <span className="font-semibold text-text-main">{item.country}</span>
-                                    <span className="text-text-secondary">Total Visitors: <span className="font-bold text-accent">{item.total.toLocaleString()}</span></span>
+                                    <span className="text-text-secondary">Total Visitors: <span className="font-bold text-primary">{item.total.toLocaleString()}</span></span>
                                 </li>
                             ))
                         ) : (
@@ -82,9 +58,8 @@ export default function AdminPage() {
                 )}
             </div>
         </div>
-
         <div className="lg:col-span-1 space-y-8">
-            <div className="rounded-xl bg-white/5 p-6 ring-1 ring-inset ring-white/10 backdrop-blur-md">
+            <div className="rounded-xl bg-glass p-6 border border-glass-border">
                 <h2 className="text-2xl font-bold font-heading border-b-2 border-primary/30 pb-3 mb-6">
                     Content Management
                 </h2>

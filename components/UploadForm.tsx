@@ -8,7 +8,7 @@ export default function UploadForm() {
   const [isUploading, setIsUploading] = useState(false)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
+    if (e.target.files?.[0]) {
       const selectedFile = e.target.files[0]
       if (selectedFile.name !== 'tools.json') {
         setMessage('Error: Filename must be exactly "tools.json"')
@@ -38,12 +38,10 @@ export default function UploadForm() {
         body: formData,
       })
       const data = await response.json()
-      if (!response.ok) {
-        throw new Error(data.error || 'Something went wrong')
-      }
+      if (!response.ok) throw new Error(data.error || 'Something went wrong')
       setMessage(`Success: ${data.message}`)
-    } catch (error: any) {
-      setMessage(`Error: ${error.message}`)
+    } catch (error) {
+      setMessage(`Error: ${(error as Error).message}`)
     } finally {
       setIsUploading(false)
     }
@@ -57,17 +55,16 @@ export default function UploadForm() {
         </label>
         <input
           id="file-upload"
-          name="file-upload"
           type="file"
           accept=".json"
           onChange={handleFileChange}
-          className="block w-full text-sm text-text-secondary file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
+          className="block w-full text-sm text-text-secondary file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-background hover:file:bg-primary-focus"
         />
       </div>
       <button
         type="submit"
         disabled={isUploading || !file}
-        className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary/90 transition-colors disabled:bg-gray-500 disabled:cursor-not-allowed"
+        className="w-full py-2 px-4 bg-primary text-background font-semibold rounded-md hover:bg-primary-focus transition-colors disabled:bg-gray-500"
       >
         {isUploading ? 'Uploading...' : 'Upload File'}
       </button>
