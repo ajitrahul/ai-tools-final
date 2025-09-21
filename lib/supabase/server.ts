@@ -17,7 +17,6 @@ export function createClient() {
             cookieStore.set({ name, value, ...options })
           } catch (error) {
             // The `set` method was called from a Server Component.
-            // This can be ignored.
           }
         },
         remove(name: string, options: CookieOptions) {
