@@ -5,6 +5,11 @@ import { createClient } from '@/lib/supabase/server';
 import { getTools, type Tool } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
 
+// Define the props type for the page
+type Props = {
+  params: { id: string };
+};
+
 async function getTool(id: string): Promise<Tool | undefined> {
   const tools = await getTools();
   return tools.find((tool) => tool.id === id);
@@ -15,7 +20,7 @@ export async function generateStaticParams() {
   return tools.map((tool) => ({ id: tool.id }));
 }
 
-export default async function ToolDetailPage({ params }: { params: { id: string } }) {
+export default async function ToolDetailPage({ params }: Props) {
   const tool = await getTool(params.id);
   if (!tool) notFound();
 
