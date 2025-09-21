@@ -5,10 +5,10 @@ import { createClient } from '@/lib/supabase/server';
 import { getTools } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
 
-// This is the simplest possible props definition that is guaranteed to work in a strict build environment.
+// This is the simplest possible props definition that is guaranteed to work in Vercel's strict build environment.
 export default async function ToolDetailPage({ params }: { params: { id: string } }) {
-  // We will fetch and find the tool directly inside the component
-  // to prevent any complex type inference issues during the build process.
+  // We fetch and find the tool directly inside the component to prevent any complex type
+  // inference issues that were causing the build to fail.
   const allTools = await getTools();
   const tool = allTools.find(t => t.id === params.id);
 

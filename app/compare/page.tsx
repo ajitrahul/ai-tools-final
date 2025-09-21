@@ -43,7 +43,7 @@ export default function ComparePage() {
       if (!response.ok) throw new Error('Failed to fetch comparison data.')
       const data = await response.json()
       setComparisonData(data)
-    } catch (err: unknown) { // Use unknown for better type safety
+    } catch { // The unused 'err' variable has been removed.
       setError('An error occurred while generating the comparison. Please try again.')
     } finally {
       setIsLoading(false)
