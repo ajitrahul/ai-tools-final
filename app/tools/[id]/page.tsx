@@ -2,23 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { getTools } from '@/lib/data';
+import { getTools, type Tool } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
+import type { User } from '@supabase/supabase-js';
 
-// This is the simplest possible props definition that is guaranteed to work in Vercel's strict build environment.
-export default async function ToolDetailPage({ params }: { params: { id: string } }) {
-  // We will fetch and find the tool directly inside the component
-  // to prevent any complex type inference issues during the build process.
-  const allTools = await getTools();
-  const tool = allTools.find(t => t.id === params.id);
-
-  if (!tool) {
-    notFound();
-  }
-
-  const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
+// NEW: A separate component to hold all the UI logic.
+// This component receives simple props (tool, user), which avoids the complex type issues.
+function ToolDetails({ tool, user }: { tool: Tool, user: User | null }) {
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
       <Link href="/" className="text-primary hover:underline mb-6 inline-block">
@@ -89,6 +79,22 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
       </div>
     </div>
   );
+}
+
+// NEW: The main page component is now very simple. Its only job is to fetch data.
+export default async function ToolDetailPage({ params }: { params: { id: string } }) {
+  const allTools = await getTools();
+  const tool = allTools.find(t => t.id === params.id);
+
+  if (!tool) {
+    notFound();
+  }
+
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // It then passes the clean data to our UI component.
+  return <ToolDetails tool={tool} user={user} />;
 }
 
 // This function is still needed for Next.js to know which pages to build
