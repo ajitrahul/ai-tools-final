@@ -6,8 +6,8 @@ import { getTools, type Tool } from '@/lib/data';
 import SaveToolButton from '@/components/SaveToolButton';
 import type { User } from '@supabase/supabase-js';
 
-// A separate, internal component to render the UI.
-// This structure avoids the complex type issues that were breaking the Vercel build.
+// This is the new internal component for UI rendering.
+// It receives simple props, which avoids the complex type error from the build.
 function ToolDetailsView({ tool, user }: { tool: Tool; user: User | null }) {
   return (
     <div className="max-w-4xl mx-auto animate-fade-in">
@@ -81,8 +81,7 @@ function ToolDetailsView({ tool, user }: { tool: Tool; user: User | null }) {
   );
 }
 
-// The main page component is now very simple.
-// Its only job is to fetch data and handle logic.
+// The main page component is now very simple. Its only job is to fetch data.
 export default async function ToolDetailPage({ params }: { params: { id: string } }) {
   const allTools = await getTools();
   const tool = allTools.find(t => t.id === params.id);
@@ -94,7 +93,7 @@ export default async function ToolDetailPage({ params }: { params: { id: string 
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  // It then passes the clean data to our UI component.
+  // It then passes the clean data to our UI component, solving the type issue.
   return <ToolDetailsView tool={tool} user={user} />;
 }
 
